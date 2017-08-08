@@ -1,51 +1,62 @@
 package GUI;
+import Control.SQLConnection;
+import Control.SQLQueryControl;
 import GUI.GUI;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * Created by Baptisvi on 07/08/2017.
  */
-public class UserPanel extends GUI {
+public class UserPanel extends GUI  {
 
+    Statement userSt = new SQLConnection().openConnection();
 
+    String[] depList = {"AFS","EXE","FIN","IT","LGC","MKT","PRP","REC","SLS"};
 
-    static void userPaneGUI(){
+    JLabel lbHeadLine = new JLabel("USER MANAGEMENT",SwingConstants.CENTER);
+    JLabel lbFirstName = new JLabel("First Name:",SwingConstants.RIGHT);
+    JLabel lbLastName = new JLabel("Last Name:",SwingConstants.RIGHT);
+    JLabel lbADDS = new JLabel("ADDS:",SwingConstants.RIGHT);
+    JLabel lbMail = new JLabel("Email:",SwingConstants.RIGHT);
+    JLabel lbDepartment = new JLabel("Department:",SwingConstants.RIGHT);
+    JLabel lbEmployeeID = new JLabel("Employee ID:",SwingConstants.RIGHT);
+    JLabel lbJobRole = new JLabel("Function:",SwingConstants.RIGHT);
+    JLabel lbManager = new JLabel("Manager:",SwingConstants.RIGHT);
+    JLabel lbTelephone = new JLabel("Tel. Number:",SwingConstants.RIGHT);
+    JLabel lbMobile = new JLabel("Moble:",SwingConstants.RIGHT);
+    JLabel lbLocation = new JLabel("Location:",SwingConstants.RIGHT);
 
-        String[] depList = {"AFS","EXE","FIN","IT","LGC","MKT","PRP","REC","SLS"};
+    JTextField tfFirstName = new JTextField();
+    JTextField tfLastName = new JTextField();
+    JTextField tfADDS = new JTextField();
+    JTextField tfMail = new JTextField();
+    JTextField tfEmployeeID = new JTextField();
+    JTextField tfWorkingCompany = new JTextField();
+    JTextField tfJobRole = new JTextField();
+    JTextField tfManager = new JTextField();
+    JTextField tfTelephone = new JTextField("+55(11)");
+    JTextField tfMobile = new JTextField("+55(11)");
+    JTextField tfLocation = new JTextField("SP");
 
-        JLabel lbHeadLine = new JLabel("USER MANAGEMENT",SwingConstants.CENTER);
-        JLabel lbFirstName = new JLabel("First Name:",SwingConstants.RIGHT);
-        JLabel lbLastName = new JLabel("Last Name:",SwingConstants.RIGHT);
-        JLabel lbADDS = new JLabel("ADDS:",SwingConstants.RIGHT);
-        JLabel lbMail = new JLabel("Email:",SwingConstants.RIGHT);
-        JLabel lbDepartment = new JLabel("Department:",SwingConstants.RIGHT);
-        JLabel lbEmployeeID = new JLabel("Employee ID:",SwingConstants.RIGHT);
-        JLabel lbJobRole = new JLabel("Function:",SwingConstants.RIGHT);
-        JLabel lbManager = new JLabel("Manager:",SwingConstants.RIGHT);
-        JLabel lbTelephone = new JLabel("Tel. Number:",SwingConstants.RIGHT);
-        JLabel lbMobile = new JLabel("Moble:",SwingConstants.RIGHT);
-        JLabel lbLocation = new JLabel("Location:",SwingConstants.RIGHT);
+    JComboBox<String> cmbDepartment = new JComboBox<>(depList);
 
-        JTextField tfFirstName = new JTextField();
-        JTextField tfLastName = new JTextField();
-        JTextField tfADDS = new JTextField();
-        JTextField tfMail = new JTextField();
-        JTextField tfEmployeeID = new JTextField();
-        JTextField tfWorkingCompany = new JTextField();
-        JTextField tfJobRole = new JTextField();
-        JTextField tfManager = new JTextField();
-        JTextField tfTelephone = new JTextField("+55(11)");
-        JTextField tfMobile = new JTextField("+55(11)");
-        JTextField tfLocation = new JTextField("SP");
+    JCheckBox cbWorkCompany = new JCheckBox("PBR (Write the company below if different)",true);
 
-        JComboBox<String> cmbDepartment = new JComboBox<>(depList);
+    DefaultTableModel model = new DefaultTableModel();
 
-        JCheckBox cbWorkCompany = new JCheckBox("PBR (Write the company below if different)",true);
+    JTable table = new JTable(model);
 
-        JTable table = new JTable();
+    JScrollPane scTable = new JScrollPane(table);
+
+    public void userPaneGUI() throws SQLException {
+
 
         lbHeadLine.setBounds(0, 0, 300,50);
         lbHeadLine.setFont(new Font(null,Font.ITALIC,14));
@@ -118,9 +129,16 @@ public class UserPanel extends GUI {
         lbLocation.setBounds(460, 300, 80 ,30);
         tfLocation.setBounds(550, 300, 60, 30);
 
-        table.setBounds(10, 350, 605, 400);
-        table.setBorder(BorderFactory.createLineBorder(Color.black));
+        scTable.setBounds(10, 350, 605, 400);
+        scTable.setBorder(BorderFactory.createLineBorder(Color.black));
 
+        table.setBounds(10, 350, 605, 400);
+        model.addColumn("Name");
+        model.addColumn("ADDS User");
+        model.addColumn("Company");
+
+        SQLQueryControl querryControl = new SQLQueryControl();
+        querryControl.userTableCreate(userSt);
 
 
         userPane.add(lbHeadLine);
@@ -148,6 +166,11 @@ public class UserPanel extends GUI {
         userPane.add(tfMobile);
         userPane.add(lbLocation);
         userPane.add(tfLocation);
-        userPane.add(table);
+        userPane.add(scTable);
     }
+
+    public void setTableModel(String name, String ad, String comp){
+        model.addRow(new String[]{name, ad, comp});
+    }
+
 }

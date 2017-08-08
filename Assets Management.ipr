@@ -146,16 +146,51 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
   <component name="libraryTable">
+    <library name="commons-lang-2.6">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/commons-lang-2.6.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="commons-logging-1.1.1">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/commons-logging-1.1.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="hsqldb">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/hsqldb.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="jackcess-2.1.6">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/jackcess-2.1.6.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
     <library name="synthetica">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/synthetica.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/synthetica.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
     </library>
     <library name="syntheticaPlain">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/syntheticaPlain.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/syntheticaPlain.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="ucanaccess-4.0.2">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/ucanaccess-4.0.2.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />

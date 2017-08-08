@@ -1,9 +1,13 @@
 package GUI;
 
+
+import Control.SQLConnection;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.sql.SQLException;
 
 /**
  * Created by Baptisvi on 03/08/2017.
@@ -11,15 +15,16 @@ import java.awt.event.FocusListener;
 public class GUI {
 
 
-    public JFrame frame = new JFrame("Assets Manager");
-    public JPanel backPane = new JPanel();
-    public JTabbedPane tabbedPane = new JTabbedPane();
-    public static JPanel userPane = new JPanel();
-    public JPanel assetPane = new JPanel();
-    public JPanel searchPane = new JPanel();
-    public JButton exitBt = new JButton("Sair");
 
-    public void guiCreator(){
+    public void guiCreator() throws SQLException{
+
+        JFrame frame = new JFrame("Assets Manager");
+        JPanel backPane = new JPanel();
+        JTabbedPane tabbedPane = new JTabbedPane();
+        JPanel userPane = new JPanel();
+        JPanel assetPane = new JPanel();
+        JPanel searchPane = new JPanel();
+        JButton exitBt = new JButton("Sair");
 
         try {
             UIManager.setLookAndFeel("de.javasoft.plaf.synthetica.SyntheticaStandardLookAndFeel");
@@ -57,7 +62,6 @@ public class GUI {
         tabbedPane.add("                         Search                       ", searchPane);
         backPane.add(exitBt);
         frame.add(backPane);
-
 
         UserPanel.userPaneGUI();
 
