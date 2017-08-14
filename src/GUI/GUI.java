@@ -14,17 +14,17 @@ import java.sql.SQLException;
  */
 public class GUI {
 
+    JPanel userPane = new JPanel();
+    JFrame frame = new JFrame("Assets Manager");
+    JPanel backPane = new JPanel();
+    JTabbedPane tabbedPane = new JTabbedPane();
 
+    JPanel assetPane = new JPanel();
+    JPanel searchPane = new JPanel();
+    JButton exitBt = new JButton("Sair");
 
-    public void guiCreator() throws SQLException{
+    public void guiCreator() throws SQLException {
 
-        JFrame frame = new JFrame("Assets Manager");
-        JPanel backPane = new JPanel();
-        JTabbedPane tabbedPane = new JTabbedPane();
-        JPanel userPane = new JPanel();
-        JPanel assetPane = new JPanel();
-        JPanel searchPane = new JPanel();
-        JButton exitBt = new JButton("Sair");
 
         try {
             UIManager.setLookAndFeel("de.javasoft.plaf.synthetica.SyntheticaStandardLookAndFeel");
@@ -54,8 +54,6 @@ public class GUI {
         exitBt.setBounds((680 /2) - 50,825, 100,20);
         exitBt.addActionListener(e -> System.exit(0));
 
-
-
         frame.add(tabbedPane);
         tabbedPane.add("                          User                        ",userPane);
         tabbedPane.add("                         Assets                       ", assetPane);
@@ -63,13 +61,20 @@ public class GUI {
         backPane.add(exitBt);
         frame.add(backPane);
 
-        UserPanel.userPaneGUI();
+        setUserGui();
 
         frame.setVisible(true);
         tabbedPane.setVisible(true);
+        userPane.setVisible(true);
 
+    }
+
+    public void setUserGui() throws SQLException {
+        UserPanel usp = new UserPanel();
+        usp.userPaneGUI(userPane);
     }
 
 
 
 }
+

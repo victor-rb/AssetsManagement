@@ -9,11 +9,9 @@ import java.sql.SQLException;
  */
 public class Main {
 
-    static GUI gui = new GUI();
-
     public static void main(String[] args) throws SQLException{
-        gui.guiCreator();
-
+       GUI gui = new GUI();
+       gui.guiCreator();
     }
 
 }
