@@ -3,7 +3,6 @@ import Control.SQLConnection;
 import Control.SQLQueryControl;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.FocusEvent;
@@ -13,65 +12,65 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- * Created by Baptisvi on 07/08/2017.
- */
+
 public class UserPanel {
 
-    String item;
+    private String item;
 
-    String[] depList = {"AFS","EXE","FIN","IT","LGC","MKT","PRP","REC","SLS"};
+    private String[] depList = {"AFS","EXE","FIN","IT","LGC","MKT","PRP","REC","SLS"};
 
-    JLabel lbHeadLine = new JLabel("USER MANAGEMENT",SwingConstants.CENTER);
-    JLabel lbFirstName = new JLabel("First Name:",SwingConstants.RIGHT);
-    JLabel lbLastName = new JLabel("Last Name:",SwingConstants.RIGHT);
-    JLabel lbADDS = new JLabel("ADDS:",SwingConstants.RIGHT);
-    JLabel lbMail = new JLabel("Email:",SwingConstants.RIGHT);
-    JLabel lbDepartment = new JLabel("Department:",SwingConstants.RIGHT);
-    JLabel lbEmployeeID = new JLabel("Employee ID:",SwingConstants.RIGHT);
-    JLabel lbJobRole = new JLabel("Function:",SwingConstants.RIGHT);
-    JLabel lbManager = new JLabel("Manager:",SwingConstants.RIGHT);
-    JLabel lbTelephone = new JLabel("Tel. Number:",SwingConstants.RIGHT);
-    JLabel lbMobile = new JLabel("Moble:",SwingConstants.RIGHT);
-    JLabel lbLocation = new JLabel("Location:",SwingConstants.RIGHT);
-    JLabel lbDisplayName = new JLabel ("Display Name:", SwingConstants.RIGHT);
-    JLabel lbDispRes = new JLabel("");
+    private JLabel lbHeadLine = new JLabel("USER MANAGEMENT",SwingConstants.CENTER);
+    private JLabel lbFirstName = new JLabel("First Name:",SwingConstants.RIGHT);
+    private JLabel lbLastName = new JLabel("Last Name:",SwingConstants.RIGHT);
+    private JLabel lbADDS = new JLabel("ADDS:",SwingConstants.RIGHT);
+    private JLabel lbMail = new JLabel("Email:",SwingConstants.RIGHT);
+    private JLabel lbDepartment = new JLabel("Department:",SwingConstants.RIGHT);
+    private JLabel lbEmployeeID = new JLabel("Employee ID:",SwingConstants.RIGHT);
+    private JLabel lbJobRole = new JLabel("Function:",SwingConstants.RIGHT);
+    private JLabel lbManager = new JLabel("Manager:",SwingConstants.RIGHT);
+    private JLabel lbTelephone = new JLabel("Tel. Number:",SwingConstants.RIGHT);
+    private JLabel lbMobile = new JLabel("Moble:",SwingConstants.RIGHT);
+    private JLabel lbLocation = new JLabel("Location:",SwingConstants.RIGHT);
+    private JLabel lbDisplayName = new JLabel ("Display Name:", SwingConstants.RIGHT);
+    private JLabel lbDispRes = new JLabel("");
 
-    JTextField tfFirstName = new JTextField();
-    JTextField tfLastName = new JTextField();
-    JTextField tfADDS = new JTextField();
-    JTextField tfMail = new JTextField();
-    JTextField tfEmployeeID = new JTextField();
-    JTextField tfWorkingCompany = new JTextField();
-    JTextField tfJobRole = new JTextField();
-    JTextField tfManager = new JTextField();
-    JTextField tfTelephone = new JTextField("+55(11)");
-    JTextField tfMobile = new JTextField("+55(11)");
-    JTextField tfLocation = new JTextField("SP");
+    private JTextField tfFirstName = new JTextField();
+    private JTextField tfLastName = new JTextField();
+    private JTextField tfADDS = new JTextField();
+    private JTextField tfMail = new JTextField();
+    private JTextField tfEmployeeID = new JTextField();
+    private JTextField tfWorkingCompany = new JTextField();
+    private JTextField tfJobRole = new JTextField();
+    private JTextField tfManager = new JTextField();
+    private JTextField tfTelephone = new JTextField();
+    private JTextField tfMobile = new JTextField();
+    private JTextField tfLocation = new JTextField();
 
-    JComboBox<String> cmbDepartment = new JComboBox<>(depList);
+    private JComboBox<String> cmbDepartment = new JComboBox<>(depList);
 
-    JCheckBox cbWorkCompany = new JCheckBox("PBR (Write the company below if different)",true);
+    private JCheckBox cbWorkCompany = new JCheckBox("PBR (Write the company below if different)",true);
 
-    DefaultTableModel model = new DefaultTableModel(){
+    private DefaultTableModel model = new DefaultTableModel(){
         @Override
         public boolean isCellEditable(int row, int column){
             return false;
         }
+
     };
 
-    JTable table = new JTable(model);
+    private JTable table = new JTable(model);
 
-    Statement userSt = new SQLConnection().openConnection();
+    private Statement userSt = new SQLConnection().openConnection();
 
 
-    JScrollPane scTable = new JScrollPane(table);
+    private JScrollPane scTable = new JScrollPane(table);
 
-    JButton btNewEntry = new JButton("New Entry");
-    JButton btEdit = new JButton("Edit");
-    JButton btCancel = new JButton("Cancel");
-    JButton btUpdate = new JButton("Update");
-    JButton btSave = new JButton("Save");
+    private JButton btNewEntry = new JButton("New Entry");
+    private JButton btEdit = new JButton("Edit");
+    private JButton btCancel = new JButton("Cancel");
+    private JButton btUpdate = new JButton("Update");
+    private JButton btSave = new JButton("Save");
+    private JButton btDelete = new JButton("Delete");
 
     void userPaneGUI(JPanel userPane) throws SQLException {
 
@@ -83,17 +82,17 @@ public class UserPanel {
 
         lbFirstName.setBounds(10,50, 80,30);
         tfFirstName.setBounds(100, 50 , 220, 30);
-        tfFirstName.setFocusable(false);
+
 
 
         lbADDS.setBounds(300, 50, 80,30);
         tfADDS.setBounds(390, 50, 220,30);
-        tfADDS.setFocusable(false);
+
 
 
         lbLastName.setBounds(10, 100, 80,30);
         tfLastName.setBounds(100, 100, 220,30);
-        tfLastName.setFocusable(false);
+
 
         lbDisplayName.setBounds(10, 150, 80, 30);
         lbDispRes.setBounds(100, 150, 220, 30);
@@ -109,11 +108,11 @@ public class UserPanel {
         });
 
         tfWorkingCompany.setBounds(390,130,215,30);
-        tfWorkingCompany.setFocusable(false);
+
 
         lbMail.setBounds(10,200,80,30);
         tfMail.setBounds(100,200,220,30);
-        tfMail.setFocusable(false);
+
 
         lbDepartment.setBounds(340,200,80,30);
         cmbDepartment.setBounds(430,200,80,30);
@@ -121,19 +120,19 @@ public class UserPanel {
 
         lbEmployeeID.setBounds(10, 250, 80, 30);
         tfEmployeeID.setBounds(100, 250 , 100, 30);
-        tfEmployeeID.setFocusable(false);
+
 
         lbJobRole.setBounds(180, 250, 80, 30);
         tfJobRole.setBounds(270, 250, 150, 30);
-        tfJobRole.setFocusable(false);
+
 
         lbManager.setBounds(400, 250, 80, 30);
         tfManager.setBounds(490, 250, 120, 30);
-        tfManager.setFocusable(false);
+
 
         lbTelephone.setBounds(10, 300, 80, 30);
         tfTelephone.setBounds(100, 300, 150, 30);
-        tfTelephone.setFocusable(false);
+
         tfTelephone.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -148,7 +147,7 @@ public class UserPanel {
 
         lbMobile.setBounds(220, 300, 80 ,30);
         tfMobile.setBounds(310, 300, 150, 30);
-        tfMobile.setFocusable(false);
+
         tfMobile.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
@@ -163,7 +162,7 @@ public class UserPanel {
 
         lbLocation.setBounds(460, 300, 80 ,30);
         tfLocation.setBounds(550, 300, 60, 30);
-        tfLocation.setFocusable(false);
+
 
         SQLQueryControl querryControl = new SQLQueryControl();
 
@@ -200,18 +199,47 @@ public class UserPanel {
 
         btNewEntry.setBounds(350, 730, 80 ,30);
         btNewEntry.addActionListener(e -> {
-            clearForm();
             btEdit.setEnabled(false);
-            table.setEnabled(false);
-            table.setFocusable(false);
-            table.setRowSelectionAllowed(false);
             btNewEntry.setVisible(false);
             btSave.setVisible(true);
-
-
+            table.removeEditor();
+            clearForm();
+            setFocus();
         });
 
         btSave.setBounds(350, 730, 80 ,30);
+        btSave.setVisible(false);
+        btSave.addActionListener(e -> {
+            if (cbWorkCompany.isSelected()) tfWorkingCompany.setText("PBR");
+            if (tfFirstName.getText().equals("") ||
+                    tfADDS.getText().equals("") ||
+                    tfLastName.getText().equals("") ||
+                    tfEmployeeID.getText().equals("") ||
+                    tfJobRole.getText().equals("") ||
+                    tfLocation.getText().equals("") ||
+                    tfMail.getText().equals("") ||
+                    tfManager.getText().equals("") ||
+                    tfTelephone.getText().equals("") ||
+                    tfWorkingCompany.getText().equals("")){
+                JOptionPane.showMessageDialog(null,"All the fields marked (*) are necessary","Fill Error Message",JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            try {
+                querryControl.newUser(userSt,tfFirstName,tfADDS,tfLastName,tfWorkingCompany,cbWorkCompany,tfMail,cmbDepartment,tfEmployeeID,tfJobRole,tfManager,tfTelephone,tfMobile,tfLocation);
+                querryControl.userTableCreate(userSt,model);
+                JOptionPane.showMessageDialog(null, "User Creation Succeed");
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+            clearForm();
+            lostFocus();
+            btSave.setVisible(false);
+            btNewEntry.setVisible(true);
+            btNewEntry.setEnabled(true);
+            btEdit.setVisible(true);
+            table.setEnabled(true);
+
+        });
 
 
         btEdit.setBounds(440, 730, 80 ,30);
@@ -219,26 +247,13 @@ public class UserPanel {
         btEdit.addActionListener(e -> {
 
             btEdit.setVisible(false);
+            btNewEntry.setVisible(false);
+            table.removeEditor();
 
-            table.setEnabled(false);
-            tfADDS.setFocusable(true);
-            tfEmployeeID.setFocusable(true);
-            tfFirstName.setFocusable(true);
-            tfJobRole.setFocusable(true);
-            tfLastName.setFocusable(true);
-            tfLocation.setFocusable(true);
-            tfMail.setFocusable(true);
-            tfManager.setFocusable(true);
-            tfMobile.setFocusable(true);
-            tfTelephone.setFocusable(true);
-            tfWorkingCompany.setFocusable(true);
-            cbWorkCompany.setSelected(true);
-            cbWorkCompany.setEnabled(true);
-            cmbDepartment.setEnabled(true);
-            table.setFocusable(true);
-            btNewEntry.setEnabled(false);
+            setFocus();
 
             btUpdate.setVisible(true);
+            btDelete.setVisible(true);
 
         });
 
@@ -248,20 +263,60 @@ public class UserPanel {
             try {
                 querryControl.userUpdate(userSt,tfFirstName,tfADDS,tfLastName,tfWorkingCompany,cbWorkCompany,tfMail,cmbDepartment,tfEmployeeID,tfJobRole,tfManager,tfTelephone,tfMobile,tfLocation);
                 querryControl.userTableCreate(userSt,model);
+                updatePane();
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
+            clearForm();
+            lostFocus();
+            btDelete.setVisible(false);
             btUpdate.setVisible(false);
+            btNewEntry.setVisible(true);
+            btNewEntry.setEnabled(true);
             btEdit.setVisible(true);
             btEdit.setEnabled(false);
-            clearForm();
+            table.setEnabled(true);
         });
 
         btCancel.setBounds(530, 730, 80 ,30);
         btCancel.addActionListener(e -> {
             clearForm();
+            lostFocus();
+            btSave.setVisible(false);
+            btEdit.setVisible(true);
+            btEdit.setEnabled(false);
+            btUpdate.setVisible(false);
+            btNewEntry.setVisible(true);
+            btNewEntry.setEnabled(true);
             table.setEnabled(true);
         });
+
+        btDelete.setBounds(350, 730, 80 ,30);
+        btDelete.setBorder(BorderFactory.createLineBorder(Color.red));
+        btDelete.setVisible(false);
+        btDelete.addActionListener(e -> {
+            int resp = JOptionPane.showConfirmDialog(null, "Proced with user Deletion\n" + tfADDS.getText(), "Deletion Confirm", JOptionPane.YES_NO_OPTION);
+            if (resp == JOptionPane.YES_OPTION){
+                try {
+                    querryControl.deleteEntry(userSt, tfADDS);
+                    querryControl.userTableCreate(userSt,model);
+                    JOptionPane.showMessageDialog(null, "User Deleted");
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+            }
+            btDelete.setVisible(false);
+            btUpdate.setVisible(false);
+            btEdit.setVisible(true);
+            btNewEntry.setVisible(true);
+            btNewEntry.setEnabled(true);
+            clearForm();
+            lostFocus();
+            table.setEnabled(true);
+        });
+
+
+        lostFocus();
 
 
         userPane.add(lbHeadLine);
@@ -297,14 +352,15 @@ public class UserPanel {
         userPane.add(btUpdate);
         userPane.add(btCancel);
         userPane.add(btSave);
+        userPane.add(btDelete);
 
     }
 
-    public void setItem(String position){
+    private void setItem(String position){
         item = position;
     }
 
-    public void clearForm(){
+    private void clearForm(){
         tfADDS.setText("");
         tfEmployeeID.setText("");
         tfFirstName.setText("");
@@ -320,5 +376,52 @@ public class UserPanel {
         cbWorkCompany.setSelected(true);
     }
 
+    private void setFocus(){
+        table.setEnabled(false);
+        tfADDS.setFocusable(true);
+        tfEmployeeID.setFocusable(true);
+        tfFirstName.setFocusable(true);
+        tfJobRole.setFocusable(true);
+        tfLastName.setFocusable(true);
+        tfLocation.setFocusable(true);
+        tfMail.setFocusable(true);
+        tfManager.setFocusable(true);
+        tfMobile.setFocusable(true);
+        tfTelephone.setFocusable(true);
+        tfWorkingCompany.setFocusable(true);
+        cbWorkCompany.setEnabled(true);
+        cmbDepartment.setEnabled(true);
+        table.setFocusable(true);
+        btNewEntry.setEnabled(false);
+    }
+
+    private void lostFocus(){
+        tfFirstName.setFocusable(false);
+        tfADDS.setFocusable(false);
+        tfLastName.setFocusable(false);
+        tfWorkingCompany.setFocusable(false);
+        tfMail.setFocusable(false);
+        tfEmployeeID.setFocusable(false);
+        tfJobRole.setFocusable(false);
+        tfManager.setFocusable(false);
+        tfTelephone.setFocusable(false);
+        tfMobile.setFocusable(false);
+        tfLocation.setFocusable(false);
+    }
+
+    private void updatePane(){
+        String update = "User Update to:\n" +
+                tfFirstName.getText() + " " + tfLastName.getText() +"\n" +
+                tfADDS.getText() +"\n" +
+                tfWorkingCompany.getText() +"\n" +
+                tfMail.getText() +"\n" +
+                tfEmployeeID.getText() +"\n" +
+                tfJobRole.getText() +"\n" +
+                tfManager.getText() +"\n" +
+                tfTelephone.getText() +"\n" +
+                tfMobile.getText() +"\n" +
+                tfLocation.getText();
+        JOptionPane.showMessageDialog(null,update,"Update to",JOptionPane.INFORMATION_MESSAGE);
+    }
 
 }

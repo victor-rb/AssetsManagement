@@ -1,27 +1,19 @@
 package GUI;
 
-
-import Control.SQLConnection;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.sql.SQLException;
 
-/**
- * Created by Baptisvi on 03/08/2017.
- */
 public class GUI {
 
-    JPanel userPane = new JPanel();
-    JFrame frame = new JFrame("Assets Manager");
-    JPanel backPane = new JPanel();
-    JTabbedPane tabbedPane = new JTabbedPane();
+    private JPanel userPane = new JPanel();
+    private JFrame frame = new JFrame("Assets Manager");
+    private JPanel backPane = new JPanel();
+    private JTabbedPane tabbedPane = new JTabbedPane();
 
-    JPanel assetPane = new JPanel();
-    JPanel searchPane = new JPanel();
-    JButton exitBt = new JButton("Sair");
+    private JPanel assetPane = new JPanel();
+    private JPanel searchPane = new JPanel();
+    private JButton exitBt = new JButton("Sair");
 
     public void guiCreator() throws SQLException {
 
@@ -69,7 +61,7 @@ public class GUI {
 
     }
 
-    public void setUserGui() throws SQLException {
+    private void setUserGui() throws SQLException {
         UserPanel usp = new UserPanel();
         usp.userPaneGUI(userPane);
     }

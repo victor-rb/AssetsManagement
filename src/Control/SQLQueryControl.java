@@ -1,7 +1,6 @@
 package Control;
 
 import GUI.UserPanel;
-import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -9,16 +8,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- * Created by Baptisvi on 08/08/2017.
- */
+
 public class SQLQueryControl extends UserPanel {
 
-    ResultSet resultSet = null;
+    private ResultSet resultSet = null;
 
     public void userTableCreate(Statement statement, DefaultTableModel model) throws SQLException{
 
-        resultSet = statement.executeQuery("SELECT ADDS_USER, WORKING_COMPANY, FIRST_NAME, LAST_NAME FROM USER");
+        resultSet = statement.executeQuery("SELECT ADDS_USER, WORKING_COMPANY, FIRST_NAME, LAST_NAME FROM USER ORDER BY FIRST_NAME ASC");
 
         model.setRowCount(0);
 
@@ -76,9 +73,9 @@ public class SQLQueryControl extends UserPanel {
         String workString;
         if (ckWC.isSelected()) {
             WC.setText("PBR");
-            workString ="PBR," + DEP.getSelectedItem().toString();
+            workString =LN.getText() + "," + FN.getText() +"(PBR," + DEP.getSelectedItem().toString() + ")";
         }else {
-            workString ="PBR," + DEP.getSelectedItem().toString() + "_EXTERN";
+            workString =LN.getText() + "," + FN.getText() +"(PBR," + DEP.getSelectedItem().toString() + "_EXTERN)";
         }
 
         statement.executeUpdate("UPDATE USER SET Working_Company = '" + WC.getText() +
@@ -86,7 +83,7 @@ public class SQLQueryControl extends UserPanel {
                 "',Last_Name = '" + LN.getText() +
                 "',ADDS_User = '" + AD.getText() +
                 "',email = '" + Mail.getText() +
-                "',displayName = '" + LN.getText() + "," + FN.getText() + " (" + workString + ")" +
+                "',displayName = '" + workString +
                 "',department = '" + DEP.getSelectedItem().toString() +
                 "',employeeID = '" + EMPID.getText() +
                 "',personalTitle = '" + JOB.getText() +
@@ -102,39 +99,30 @@ public class SQLQueryControl extends UserPanel {
         String workString;
         if (ckWC.isSelected()) {
             WC.setText("PBR");
-            workString ="PBR," + DEP.getSelectedItem().toString();
+            workString =LN.getText() + "," + FN.getText() +"(PBR," + DEP.getSelectedItem().toString() + ")";
         }else {
-            workString ="PBR," + DEP.getSelectedItem().toString() + "_EXTERN";
+            workString =LN.getText() + "," + FN.getText() +"(PBR," + DEP.getSelectedItem().toString() + "_EXTERN)";
         }
 
-        statement.executeQuery("INSERT INTO USER (" +
-                "Working_Company" +
-                ",First_Name" +
-                ",Last_Name" +
-                ",ADDS_User" +
-                ",email" +
-                ",displayName" +
-                ",department" +
-                ",employeeID" +
-                ",personalTitle" +
-                ",manager" +
-                ",telephoneNumber" +
-                ",mobile" +
-                ",Location" +
-                ") VALUES(" +
-                        WC +"," +
-                        FN +"," +
-                        LN +"," +
-                        AD +"," +
-                        Mail +"," +
-                        workString +"," +
-                        DEP +"," +
-                        EMPID +"," +
-                        JOB +"," +
-                        MAN +"," +
-                        TEL +"," +
-                        MOB +"," +
-                        LOC +")");
+        statement.executeUpdate("INSERT INTO USER" +
+                " VALUES('" +
+                        WC.getText() +"','" +
+                        FN.getText() +"','" +
+                        LN.getText() +"','" +
+                        AD.getText() +"','" +
+                        Mail.getText() +"','" +
+                        workString +"','" +
+                        DEP.getSelectedItem().toString() +"','" +
+                        EMPID.getText() +"','" +
+                        JOB.getText() +"','" +
+                        MAN.getText() +"','" +
+                        TEL.getText() +"','" +
+                        MOB.getText() +"','" +
+                        LOC.getText() +"')");
     }
 
+    public void deleteEntry(Statement statement, JTextField adds) throws SQLException {
+
+        statement.executeUpdate("DELETE FROM USER WHERE ADDS_USER = '" + adds.getText() + "'");
+    }
 }
