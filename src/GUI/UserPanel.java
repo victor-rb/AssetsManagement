@@ -20,17 +20,17 @@ public class UserPanel {
     private String[] depList = {"AFS","EXE","FIN","IT","LGC","MKT","PRP","REC","SLS"};
 
     private JLabel lbHeadLine = new JLabel("USER MANAGEMENT",SwingConstants.CENTER);
-    private JLabel lbFirstName = new JLabel("First Name:",SwingConstants.RIGHT);
-    private JLabel lbLastName = new JLabel("Last Name:",SwingConstants.RIGHT);
-    private JLabel lbADDS = new JLabel("ADDS:",SwingConstants.RIGHT);
-    private JLabel lbMail = new JLabel("Email:",SwingConstants.RIGHT);
-    private JLabel lbDepartment = new JLabel("Department:",SwingConstants.RIGHT);
-    private JLabel lbEmployeeID = new JLabel("Employee ID:",SwingConstants.RIGHT);
-    private JLabel lbJobRole = new JLabel("Function:",SwingConstants.RIGHT);
-    private JLabel lbManager = new JLabel("Manager:",SwingConstants.RIGHT);
-    private JLabel lbTelephone = new JLabel("Tel. Number:",SwingConstants.RIGHT);
+    private JLabel lbFirstName = new JLabel("First Name*:",SwingConstants.RIGHT);
+    private JLabel lbLastName = new JLabel("Last Name*:",SwingConstants.RIGHT);
+    private JLabel lbADDS = new JLabel("ADDS*:",SwingConstants.RIGHT);
+    private JLabel lbMail = new JLabel("Email*:",SwingConstants.RIGHT);
+    private JLabel lbDepartment = new JLabel("Department*:",SwingConstants.RIGHT);
+    private JLabel lbEmployeeID = new JLabel("Employee ID*:",SwingConstants.RIGHT);
+    private JLabel lbJobRole = new JLabel("Function*:",SwingConstants.RIGHT);
+    private JLabel lbManager = new JLabel("Manager*:",SwingConstants.RIGHT);
+    private JLabel lbTelephone = new JLabel("Tel. Number*:",SwingConstants.RIGHT);
     private JLabel lbMobile = new JLabel("Moble:",SwingConstants.RIGHT);
-    private JLabel lbLocation = new JLabel("Location:",SwingConstants.RIGHT);
+    private JLabel lbLocation = new JLabel("Location*:",SwingConstants.RIGHT);
     private JLabel lbDisplayName = new JLabel ("Display Name:", SwingConstants.RIGHT);
     private JLabel lbDispRes = new JLabel("");
 
@@ -60,8 +60,7 @@ public class UserPanel {
 
     private JTable table = new JTable(model);
 
-    private Statement userSt = new SQLConnection().openConnection();
-
+    private Statement userSt = new GUI().setMainST();
 
     private JScrollPane scTable = new JScrollPane(table);
 

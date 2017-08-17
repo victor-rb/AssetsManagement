@@ -1,10 +1,15 @@
 package GUI;
 
+import Control.SQLConnection;
+
 import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class GUI {
+
+    private Statement mainST = new SQLConnection().openConnection();
 
     private JPanel userPane = new JPanel();
     private JFrame frame = new JFrame("Assets Manager");
@@ -42,6 +47,7 @@ public class GUI {
 
         assetPane.setSize(630, 800);
         assetPane.setBorder(BorderFactory.createLineBorder(Color.black));
+        assetPane.setLayout(null);
 
         exitBt.setBounds((680 /2) - 50,825, 100,20);
         exitBt.addActionListener(e -> System.exit(0));
@@ -54,6 +60,7 @@ public class GUI {
         frame.add(backPane);
 
         setUserGui();
+        setAssetPane();
 
         frame.setVisible(true);
         tabbedPane.setVisible(true);
@@ -66,7 +73,13 @@ public class GUI {
         usp.userPaneGUI(userPane);
     }
 
+    private void setAssetPane() throws SQLException {
+        AssetPanel asp = new AssetPanel();
+        asp.assetPaneGUI(assetPane);
+    }
 
-
+    Statement setMainST(){
+        return mainST;
+    }
 }
 

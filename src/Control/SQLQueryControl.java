@@ -1,5 +1,6 @@
 package Control;
 
+import GUI.GUI;
 import GUI.UserPanel;
 
 import javax.swing.*;
@@ -7,6 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 
 public class SQLQueryControl extends UserPanel {
@@ -14,6 +16,7 @@ public class SQLQueryControl extends UserPanel {
     private ResultSet resultSet = null;
 
     public void userTableCreate(Statement statement, DefaultTableModel model) throws SQLException{
+
 
         resultSet = statement.executeQuery("SELECT ADDS_USER, WORKING_COMPANY, FIRST_NAME, LAST_NAME FROM USER ORDER BY FIRST_NAME ASC");
 
@@ -124,5 +127,17 @@ public class SQLQueryControl extends UserPanel {
     public void deleteEntry(Statement statement, JTextField adds) throws SQLException {
 
         statement.executeUpdate("DELETE FROM USER WHERE ADDS_USER = '" + adds.getText() + "'");
+    }
+
+    public ArrayList<String> setDataUser(Statement statement) throws SQLException {
+
+        resultSet = statement.executeQuery("SELECT ADDS_USER FROM USER ORDER BY ADDS_USER");
+
+        ArrayList<String> data = new ArrayList<>();
+
+        while (resultSet.next()) {
+            data.add(resultSet.getString(1).toLowerCase().trim());
+        }
+        return data;
     }
 }
