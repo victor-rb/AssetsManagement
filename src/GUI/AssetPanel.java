@@ -1,16 +1,12 @@
 package GUI;
 
 import Control.SQLQueryControl;
-
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 /**
  * Created by Baptisvi on 16/08/2017.
@@ -44,6 +40,16 @@ public class AssetPanel {
 
     private JList<Object> autoList = new JList<>();
 
+    private DefaultTableModel model = new DefaultTableModel(){
+        @Override
+        public boolean isCellEditable(int row, int column){
+            return false;
+        }
+    };
+    private JTable assTable = new JTable(model);
+
+    private JScrollPane scPane = new JScrollPane(assTable);
+
 
     void assetPaneGUI(JPanel assetPane) throws SQLException {
 
@@ -64,17 +70,25 @@ public class AssetPanel {
                 DefaultListModel<Object> model = new DefaultListModel<>();
                 autoList.setVisible(true);
                 assetPane.setComponentZOrder(autoList,2);
-                System.out.println(autoList.getComponentZOrder(autoList));
-                for (int i = 0; i < data.length; i++) {
-                    if (data[i].toString().contains(tfUser.getText().toLowerCase())) {
-                        model.addElement(data[i]);
-
+                for (Object aData : data) {
+                    if (aData.toString().contains(tfUser.getText().toLowerCase())) {
+                        model.addElement(aData);
                     }
                     autoList.setModel(model);
                     autoList.setFixedCellHeight(30);
-                    if (autoList.getModel().getSize() < 10){
+                    if (autoList.getModel().getSize() < 10) {
                         autoList.setSize(100, autoList.getFixedCellHeight() * autoList.getModel().getSize());
                     }
+                }
+            }
+        });
+        tfUser.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (autoList.getModel().getSize() == 0 && !(tfUser.getText().equals(""))) {
+                    JOptionPane.showMessageDialog(null, "User not Found", "Missing User", JOptionPane.INFORMATION_MESSAGE);
+                    tfUser.setText("");
+                    tfUser.requestFocus();
                 }
             }
         });
@@ -105,16 +119,27 @@ public class AssetPanel {
                 super.mouseClicked(e);
                 tfUser.setText(autoList.getSelectedValue().toString());
                 autoList.setVisible(false);
+                try {
+                    queryControl.assetTableCreate(assetSt, model,tfUser);
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
             }
             @Override
             public void mouseEntered(MouseEvent e){
-                super.mouseEntered(e);
                 autoList.requestFocus();
             }
+
         });
 
+        scPane.setBounds(10, 350, 605, 350);
+        scPane.setBorder(BorderFactory.createLineBorder(Color.black));
 
-
+        assTable.setBounds(10, 350, 605, 360);
+        model.addColumn("Name");
+        model.addColumn("ADDS User");
+        model.addColumn("Type");
+        model.addColumn("Model");
 
         assetPane.add(lbHeadLine);
         assetPane.add(lbName);
@@ -135,9 +160,7 @@ public class AssetPanel {
         assetPane.add(lbModel);
         assetPane.add(tfModel);
         assetPane.add(autoList);
-
-        //assetPane.add();
-
+        assetPane.add(scPane);
     }
 
 }

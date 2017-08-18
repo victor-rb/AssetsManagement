@@ -202,13 +202,16 @@ public class UserPanel {
             btNewEntry.setVisible(false);
             btSave.setVisible(true);
             table.removeEditor();
-            clearForm();
+
             setFocus();
+
+            table.clearSelection();
         });
 
         btSave.setBounds(350, 730, 80 ,30);
         btSave.setVisible(false);
         btSave.addActionListener(e -> {
+            if (updatePane() == JOptionPane.NO_OPTION) return;
             if (cbWorkCompany.isSelected()) tfWorkingCompany.setText("PBR");
             if (tfFirstName.getText().equals("") ||
                     tfADDS.getText().equals("") ||
@@ -259,10 +262,10 @@ public class UserPanel {
         btUpdate.setBounds(440, 730, 80 ,30);
         btUpdate.setVisible(false);
         btUpdate.addActionListener(e -> {
+            if (updatePane() == JOptionPane.NO_OPTION) return;
             try {
                 querryControl.userUpdate(userSt,tfFirstName,tfADDS,tfLastName,tfWorkingCompany,cbWorkCompany,tfMail,cmbDepartment,tfEmployeeID,tfJobRole,tfManager,tfTelephone,tfMobile,tfLocation);
                 querryControl.userTableCreate(userSt,model);
-                updatePane();
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
@@ -287,6 +290,7 @@ public class UserPanel {
             btUpdate.setVisible(false);
             btNewEntry.setVisible(true);
             btNewEntry.setEnabled(true);
+            btDelete.setVisible(false);
             table.setEnabled(true);
         });
 
@@ -390,7 +394,6 @@ public class UserPanel {
         tfWorkingCompany.setFocusable(true);
         cbWorkCompany.setEnabled(true);
         cmbDepartment.setEnabled(true);
-        table.setFocusable(true);
         btNewEntry.setEnabled(false);
     }
 
@@ -408,11 +411,18 @@ public class UserPanel {
         tfLocation.setFocusable(false);
     }
 
-    private void updatePane(){
+    private int updatePane(){
+        String workcomp;
+        if (cbWorkCompany.isSelected()){
+            workcomp = "PBR";
+        }else {
+            workcomp = tfWorkingCompany.getText();
+        }
+        if (tfMobile.getText().equals("")) tfMobile.setText("N/A");
         String update = "User Update to:\n" +
                 tfFirstName.getText() + " " + tfLastName.getText() +"\n" +
                 tfADDS.getText() +"\n" +
-                tfWorkingCompany.getText() +"\n" +
+                workcomp +"\n" +
                 tfMail.getText() +"\n" +
                 tfEmployeeID.getText() +"\n" +
                 tfJobRole.getText() +"\n" +
@@ -420,7 +430,8 @@ public class UserPanel {
                 tfTelephone.getText() +"\n" +
                 tfMobile.getText() +"\n" +
                 tfLocation.getText();
-        JOptionPane.showMessageDialog(null,update,"Update to",JOptionPane.INFORMATION_MESSAGE);
+        return JOptionPane.showConfirmDialog(null,update,"Update to",JOptionPane.YES_NO_OPTION);
+
     }
 
 }

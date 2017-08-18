@@ -1,6 +1,4 @@
 package Control;
-
-import GUI.GUI;
 import GUI.UserPanel;
 
 import javax.swing.*;
@@ -126,6 +124,12 @@ public class SQLQueryControl extends UserPanel {
 
     public void deleteEntry(Statement statement, JTextField adds) throws SQLException {
 
+        resultSet = statement.executeQuery("SELECT * FROM ASSETS WHERE user_ad = '"+ adds.getText()+"'");
+
+        if (resultSet.next()){
+            statement.executeUpdate("UPDATE ASSETS SET user_ad = 'SPARE' WHERE user_ad = '"+ adds.getText() +"'");
+        }
+
         statement.executeUpdate("DELETE FROM USER WHERE ADDS_USER = '" + adds.getText() + "'");
     }
 
@@ -140,4 +144,21 @@ public class SQLQueryControl extends UserPanel {
         }
         return data;
     }
+
+    public void assetTableCreate(Statement statement, DefaultTableModel tbmodel, JTextField ad) throws SQLException{
+
+
+    resultSet = statement.executeQuery("SELECT name_equip, user_ad, type, model FROM ASSETS WHERE user_ad = '"+ ad.getText() +"' ORDER BY name_equip ASC");
+
+        tbmodel.setRowCount(0);
+
+        while (resultSet.next()){
+            String name = resultSet.getString("name_equip");
+            String AD = resultSet.getString("user_ad");
+            String type = resultSet.getString("type");
+            String model = resultSet.getString("model");
+            tbmodel.addRow(new String[] {name, AD,type, model});
+        }
+    }
+
 }
